@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet"> 
+<style>
+    *{
+        box-sizing: border-box;
+    }
+
+    #wrapper {
+       
+        background-color: #333;
+        display: block;
+        width: 70%;
+        margin: auto;
+        padding: 1.5em;
+        min-width: 400px;
+        border-radius: 1em;
+    }
+    header {
+       
+        text-align: center;
+        color: #ccc;
+        
+           }
+
+        body{
+            margin: 2em;
+            background-color: #ccc;
+            
+        }
+
+        #form {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            margin-top: 2.6em;
+            border: 1px solid black;
+            
+            
+        }
+        #input1 {
+            font-size: 1.2em;
+            padding: 0.5em;
+             
+        }
+
+        #input1:focus {
+           
+        }
+
+        #btn1, #btn2 {
+            background-color: rgb(83, 137, 209);
+            color: #ccc;
+            text-decoration: none;
+            font-size: 1.4em;
+            padding: 0.5em;
+            text-align: center;
+        }
+
+        #btn1:hover {
+            background-color: rgb(94, 154, 233);
+            color: #fff;
+        }
+        .close {
+            background-color: rgb(133, 50, 50);
+            color: #ccc;
+            text-align: center; 
+            
+        }
+
+          .close:hover {
+            background-color: rgb(187, 77, 77);
+            color: #fff;
+            text-align: center; 
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+
+        ul {
+            padding: 1em;
+            margin: 0;
+           
+        }
+
+        li {
+            
+            display: grid;
+            grid-template-columns: 4fr 1fr;
+            margin-top: 1em;
+            font-size: 1.8em;
+            padding: 1em;
+            border-radius: 1em;
+            border: 1px solid rgb(167, 167, 167);
+            
+        }
+
+        li:hover {
+            border: 1px solid rgb(65, 60, 60);
+           
+        }
+
+        main {
+          
+        display: block;
+        width: 70%;
+        margin: auto;
+        padding: 1.5em;
+        min-width: 400px;
+        }
+
+
+        #progressAll {
+            background-color: rgb(199, 199, 199);
+            width: 60%;
+            color: #ccc;
+            display: grid;
+            grid-template-columns: 4fr 1fr;
+         
+            border: 1px solid black;
+            margin: auto;
+           
+            
+        }
+        
+        #progress {
+            background-color: green;
+            width: 0%;
+           
+           
+        }
+
+        #myBar {
+         
+        }
+        
+        #btn2 {
+            border-left: 1px solid black;
+        }
+        #slider {
+            margin:auto;
+            display: grid;
+            grid-template-columns: 1fr 5fr;
+           
+            padding: 1em;
+            color: #fff;
+            display: block;
+        }   
+
+        #slidey {
+            margin-top: 1.3em;
+
+        }
+
+        #calculator {
+            background-color: #333;
+        display: block;
+       
+        width: 70%;
+        margin: auto;
+        padding: 1.5em;
+        min-width: 400px;
+        border-radius: 1em;
+        font-size: 1.3em;
+        }
+
+        #confirm1 {
+            text-decoration: none;
+           float: right;
+          margin-top: -0.1em;
+           background-color: green;
+           color: #fff;
+           padding: 0.5em;
+           
+        }
+
+ @media(min-width: 1500px) {
+            #wrapper{
+                width: 60%;
+            }
+
+           
+ }
+
+
+ @media(max-width: 500px) {
+            #wrapper{
+                width: 100%;
+            }
+
+           
+ }
+      
+</style>
+<body>
+    
+<div id="wrapper">
+    <header>
+        <h1>To do list App</h1>
+    </header>
+    <div id="form">
+        <input type="text" placeholder="Title..." id="input1"><a  id="btn1" href="#">Submit</a>
+    </div> <!-- end of form -->
+    <br/>
+
+
+
+
+
+
+</div> <!-- end of Wrapper -->
+<br/>
+
+
+<br/>
+<main>
+    <ul id="myUl">
+    </ul>
+</main>
+
+<div id="progressAll">
+    <div id="progress">
+        <div id="myBar">10%</div>
+       
+    </div>
+    <a onclick="move()" href="#" id="btn2">Download</a>
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+
+document.getElementById("btn1").addEventListener("click",createList,false);
+
+onkeydown = function(e){
+    keys = e.keyCode;
+
+    if(keys == 13){
+        createList();
+
+    }
+}
+
+function createList(){
+
+
+var listItem = document.createElement("li");
+var inputValue = document.getElementById("input1").value;
+var listText = document.createTextNode(inputValue);
+listItem.appendChild(listText);
+
+    if(inputValue == ""){
+        alert("Please enter something Valid!");
+    } else {
+        document.getElementById("myUl").appendChild(listItem);
+    }
+    
+    document.getElementById("input1").value = "";
+
+
+    var span = document.createElement("SPAN");
+    var spanText = document.createTextNode("X");
+    span.className = "close";
+    span.appendChild(spanText);
+
+    listItem.appendChild(span);
+
+    var close = document.getElementsByClassName("close");
+
+    for(var x = 0; x < close.length; x++){
+        close[x].onclick = function(){
+            var div = this.parentElement;
+            div.style.display = "none";
+        };
+    }
+
+
+}; // end of Create Element 
+
+
+
+function move(){
+    var button2 = document.getElementById("btn2");
+    button2.style.pointerEvents = "none";
+    var Element = document.getElementById("myBar");
+    var width = 0;
+    var id = setInterval(frame,10);
+
+    function frame(){
+        if(width >= 100){
+           alert("Download Complete!");
+           clearInterval(id);
+           document.getElementById("progressAll").style.display = "none";
+        } else {
+            width ++;
+            document.getElementById("progress").style.width = width + "%";
+            document.getElementById("progress").innerHTML = width + "%";
+        }
+    }
+
+}
+
+var slide = document.getElementById("slidey");
+var output = document.getElementById("output");
+
+output.innerHTML = "Value: " + slide.value;
+
+slide.oninput = function(){
+    output.innerHTML = "Value: " + slide.value;
+}
+
+
+
+var Celcius = document.getElementById("cel1");
+var c2fOutput = document.getElementById("far1");
+
+Celcius.onchange = function(){
+    c2fOutput.innerHTML = "fahrenheit: " + Celcius.value * (1.8) + 32;
+   
+}
+
+
+
+
+</script>
+</body>
+</html>
